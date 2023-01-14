@@ -1,0 +1,99 @@
+.empty-peg{
+    position: relative;
+    margin:auto;
+    height: 40px;
+    width:40px;
+    background-color:gray;
+    border-radius: 50%;
+}
+
+.red-peg{
+    position:relative;
+    margin: auto;
+    height: 80px;
+    width: 80px;
+    background-color: red;
+    border-radius: 50%;
+    border-width: 1px;
+    border-style: outset;
+    border-color: darkred;
+}
+
+.blue-peg{
+    position:relative;
+    margin: auto;
+    height: 80px;
+    width: 80px;
+    background-color: blue;
+    border-radius: 50%;
+    border-width: 1px;
+    border-style: outset;
+    border-color: darkblue;
+}
+
+.orange-peg{
+    position:relative;
+    margin: auto;
+    height: 80px;
+    width: 80px;
+    background-color: orange;
+    border-radius: 50%;
+    border-width: 1px;
+    border-style: outset;
+    border-color: orangered;
+}
+
+.white-peg{
+    position:relative;
+    margin: auto;
+    height: 80px;
+    width: 80px;
+    background-color: whitesmoke;
+    border-radius: 50%;
+    border-width: 1px;
+    border-style: outset;
+    border-color: gray;
+}
+
+.green-peg{
+    position:relative;
+    margin: auto;
+    height: 80px;
+    width: 80px;
+    background-color: green;
+    border-radius: 50%;
+    border-width: 1px;
+    border-style: outset;
+    border-color: darkgreen;
+}
+
+.magenta-peg{
+    position:relative;
+    margin: auto;
+    height: 80px;
+    width: 80px;
+    background-color: magenta;
+    border-radius: 50%;
+    border-width: 1px;
+    border-style: outset;
+    border-color: darkmagenta;
+}
+
+.black-peg{
+    position:relative;
+    margin: auto;
+    height: 80px;
+    width: 80px;
+    background-color: black;
+    border-radius: 50%;
+    border-width: 1px;
+    border-style: outset;
+    border-color: black;
+}
+
+.peg-button{
+    display:block;
+    border-width: 2px;
+    border-style: outset;
+    border-color: black;
+}

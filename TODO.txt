@@ -1,0 +1,19 @@
+TODO List
+
+Functional:
+- Implement game as class (maybe, not really necessary)
+- Do not allow interaction after game finished except to reload board
+- Save and load gamestates
+- Implement better alert system
+- Allow users to place pegs in any position for current guess (drag and drop)
+- Add restart button
+- make n x m size board, render dynamically (probably will need class/object)
+
+UI:
+- Reveal code to break in place of black pegs at the top (win and lose?)
+- Style pegs to look 3d
+- Add original hint display
+- Clean up control panel resizing
+- Display current guess (Show on board somehow?)
+- Pick better font for title
+- Better background?
