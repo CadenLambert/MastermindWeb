@@ -1,8 +1,8 @@
 # MastermindWeb
 
 ***CURRENTLY NOT WORKING***
-Implementing drag and drop for the pegs now. I would have a branch available with the buttons, but there was a bug with my method and it was only
-meant to be a temporary solution anyway, so I'm not even going to bother fixing it.
+Implementing drag and drop for the pegs now. I would have a branch available with the code creation using the buttons, but there was a bug with 
+my method and it was only meant to be a temporary solution anyway, so I'm not even going to bother fixing it.
 
 
 Download the whole folder and open index.html in your browser and start playing!
