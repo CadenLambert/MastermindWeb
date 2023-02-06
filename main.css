@@ -12,12 +12,18 @@ body {
     height: auto;
     width: 800px;
     margin: auto;
+    margin-bottom: 20px;
 }
 
 .title-box{
     border-bottom: 5px solid black;
     font-size: 300%;
     text-align: center;
+    -moz-user-select: -moz-none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
 
 .code-area{
@@ -37,6 +43,11 @@ body {
     height: 100px;
     width: 25%;
     vertical-align: middle;
+    -moz-user-select: -moz-none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
 
 .game-area{
@@ -55,7 +66,11 @@ body {
     display:table-row;
     width:auto;
     height:100px;
-
+    -moz-user-select: -moz-none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
 
 .color-choice{
@@ -73,6 +88,11 @@ body {
     text-align: center;
     border-left: 5px solid black;
     border-top: 2px solid black;
+    -moz-user-select: -moz-none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
 
 .game-controls{
@@ -122,4 +142,9 @@ body {
 
 .game-button{
     font-weight:bold;
+    -moz-user-select: -moz-none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }

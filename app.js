@@ -1,27 +1,52 @@
 const colors = ['Red', 'Blue', 'Orange', 'White', 'Green', 'Magenta', 'Empty'];
+const color_classes = ['red-peg', 'blue-peg', 'orange-peg', 'white-peg', 'green-peg', 'magenta-peg', 'empty-peg']
 const max_code_length = 4;
 const max_guess = 10;
 let game_board = initialize_game_board(max_guess, max_code_length, 'Empty');
 let current_guess = 0;
 let current_code_pos = 0;
 let code_to_break = [];
-let holding = false;
+let held_peg = '';
+let cur_guess_id;
+let cur_hint_id;
 
 //TODO
 //Allow users to place pegs in any position for current guess (drag and drop) Do this first
 //Save and load gamestates
 //Implement better alert system
 
-
 window.onload = function(){
     for(let x of document.getElementsByClassName('peg-button')){
-        //x.addEventListener('click', build_code, false);
-        x.addEventListener('mousedown', grab_peg, false);
+        //x.addEventListener('', build_code, false);
+        x.addEventListener('dragstart', grab_peg, false);
     }
-    document.getElementById('backspace-button').addEventListener('click', backspace, false);
+    for(let x of document.getElementsByClassName('color-choice')){
+        x.addEventListener('drop', drop_peg, false);
+        x.addEventListener('dragenter', handle_drag_enter, false);
+        x.addEventListener('dragleave', handle_drag_leave, false);
+        x.addEventListener('dragover', allow_drop, false);
+        x.setAttribute("value", parseInt(x.getAttribute('id').slice(-1)));
+        //x.attributes.value = parseInt(x.getAttribute('id').slice(-1)); //setting values to use as indexes for gameboard
+    }
+    document.getElementById('clear-button').addEventListener('click', clear_guess, false);
     document.getElementById('submit-button').addEventListener('click', submit_guess, false);
     generate_code();
+    set_cur_guess_ids(false);
 }
+
+// function gen_guess_id(val){
+//     if(val >= 0 && val <= max_guess){
+//         return `guess-row-${val}`;
+//     }
+//     return null;
+// }
+
+// function gen_hint_id(val){
+//     if(val >= 0 && val <= max_guess){
+//         return `hint-${val}`;
+//     }
+//     return null;
+// }
 
 function generate_code(){
     var color_id
@@ -31,57 +56,54 @@ function generate_code(){
     }
 }
 
+function set_cur_guess_ids(increment){
+    if(increment){
+        current_guess++;
+    }
+    cur_guess_id = `guess-row-${current_guess}`;
+    cur_hint_id = `hint-${current_guess}`;
+}
+
+function handle_drag_enter(event){
+    event.preventDefault();
+}
+
+function handle_drag_leave(event){
+    event.preventDefault();
+}
+
+function allow_drop(event){
+    event.preventDefault();
+}
+
 function grab_peg(event){
-    holding = true;
+    held_peg = this.getAttribute('value');
     console.log('grabbed a peg');
 }
 
-function drag_peg(event){
-    if(holding){
-        console.log('dragged a peg');
-    }
-    
-}
-
 function drop_peg(event){
-    holding = false;
-    console.log('dropped a peg');
+    event.stopPropagation();
+    if(colors.indexOf(held_peg) >= 0 && this.parentElement.getAttribute('id') == cur_guess_id){
+        this.firstChild.className = "";
+        this.firstChild.classList.add(color_classes[colors.indexOf(held_peg)]);
+        game_board[current_guess][this.getAttribute('value')] = held_peg;
+        held_peg = '';
+        console.log('dropped a peg');
+    }
 }
 
-function build_code(event){
-    //Implement drag and drop
-
-
-
-    // var peg_name = event.currentTarget.value;
-    // var peg_class = `${peg_name.toLowerCase()}-peg`;
-    // var peg_id;
-    // if(current_code_pos < max_code_length){
-    //     peg_id = `color-${current_guess}-${current_code_pos}`
-    //     game_board[current_guess][current_code_pos] = peg_name;
-    //     document.getElementById(peg_id).innerHTML = `<div class='${peg_class}'></div>`;
-    //     if(current_code_pos + 1 < max_code_length){
-    //         current_code_pos++;
-    //     }
-    // }
-    
-    
-}
-
-
-function backspace(){
-    //Implement drag and drop
-
-    // var peg_id = `color-${current_guess}-${current_code_pos}`
-    // document.getElementById(peg_id).innerHTML = `<div class='empty-peg'></div>`;
-    // game_board[current_guess][current_code_pos] = 'Empty';
-
+function clear_guess(){
+    for(let x of document.getElementById(cur_guess_id).children){
+        if(x.classList.contains('color-choice')){
+            x.firstChild.className = '';
+            x.firstChild.classList.add('empty-peg');
+            game_board[current_guess][x.getAttribute('value')] = 'Empty';
+        }
+    }
 }
 
 function submit_guess(){
     var match_results = [];
-    var hint_id = `hint-${current_guess}`
-    //Check if guess is complete, if not then notify
     if(game_board[current_guess].indexOf('Empty') == -1){
         match_results = compare_codes(game_board[current_guess], code_to_break);
         if(match_results[0] == max_code_length){
@@ -89,9 +111,8 @@ function submit_guess(){
             alert('You Win');
         }
         else if(current_guess < max_guess-1){
-            document.getElementById(hint_id).innerHTML = `Position: ${match_results[0]}<br>Color: ${match_results[1]}`
-            current_guess++;
-            current_code_pos = 0;
+            document.getElementById(cur_hint_id).innerHTML = `Position: ${match_results[0]}<br>Color: ${match_results[1]}`
+            set_cur_guess_ids(true);
         }
         else{
             reveal_code(true);
